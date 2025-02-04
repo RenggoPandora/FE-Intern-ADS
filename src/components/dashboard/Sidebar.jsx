@@ -6,13 +6,13 @@ const Sidebar = () => {
         </div>
         <ul className='mt-3'>
             <li className='font-bold text-base text-white px-8 py-4 hover:bg-[#489CFF]'>
-              <a href="/Admin/dashboard" className="text-white">Dashboard</a>
+              <a href="/Admin/dashboard" className="text-white w-full flex">Dashboard</a>
             </li>
             <li className='font-bold text-base text-white px-8 py-4 hover:bg-[#489CFF]'>
-             <a href="/Admin/kelola-kelas" className="text-white">Kelola Kelas</a>
+             <a href="/Admin/kelola-kelas" className="text-white w-full flex">Kelola Kelas</a>
             </li>
             <li className='font-bold text-base text-white px-8 py-4 hover:bg-[#489CFF]'>
-             <a href="/Admin/keluar" className="text-white">Keluar</a>
+             <a href="/Admin/keluar" className="text-white w-full flex">Keluar</a>
             </li>
         </ul>
         

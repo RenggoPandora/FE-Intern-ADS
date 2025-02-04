@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Dashboard from "./components/templates/Dashboard"
 import KelolaKelas from "./components/templates/KelolaKelas";
 import Form from "./components/kelola-kelas/Form";
+import Login from "./components/templates/AdminLogin";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "Admin/kelola-kelas/tambah-kelas",
     element: <Form/>
+  },
+  {
+    path: "Admin/keluar",
+    element: <Login/>
   }
 ]);
 
