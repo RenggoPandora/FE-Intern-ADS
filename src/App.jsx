@@ -1,17 +1,24 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import Dashboard from "./components/templates/Dashboard"
+import KelolaKelas from "./components/templates/KelolaKelas";
 
-import Sidebar from './components/sidebar'
-import HeaderDashboard from './components/HeaderDashboard'
-import Carddashboard from './components/carddashboard'
+const router = createBrowserRouter([
+  {
+    path: "/Admin",
+    element: <Dashboard />,
+  },
+  {
+    path: "/Admin/dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "Admin/kelola-kelas",
+    element: <KelolaKelas/>,
+  }
+]);
+
 function App() {
-  return (
-    <div className ='flex'>
-    <Sidebar/>
-    <div className='flex flex-col w-full'>
-      <HeaderDashboard/>
-      <Carddashboard/>
-    </div>
-    </div>
-  )
+  return <RouterProvider router={router} />;
 }
 
 export default App
