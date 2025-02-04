@@ -7,13 +7,13 @@ const cards= [
 
 function Card({ card }) {
     return (
-        <div className={`flex items-center w-1/3 h-[150px] p-6 rounded-lg shadow-md ${card.type === "au" ? "bg-[#489CFF]" : card.type === "ac" ? "bg-[#73CA5C]" : "bg-[#6148FF]"} text-white`}>
+        <div className={`flex items-center w-1/3 h-[150px] p-6 rounded-[25px] shadow-md ${card.type === "au" ? "bg-[#489CFF]" : card.type === "ac" ? "bg-[#73CA5C]" : "bg-[#6148FF]"} text-white`}>
             <div className="rounded-[25px] bg-white p-3 mr-4">
                 <img src="/logocard.svg" alt="User" />
             </div>
             <div className="flex flex-col justify-center">
-                <h2 className="text-2xl">{card.value}</h2>
-                <p className="text-2xl font-semibold">{card.name}</p>
+                <h2 className="text-xl font-semibold">{card.value}</h2>
+                <p className="text-xl font-bold">{card.name}</p>
             </div>
         </div>
     );

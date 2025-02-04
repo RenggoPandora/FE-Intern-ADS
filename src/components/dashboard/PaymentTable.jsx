@@ -1,7 +1,7 @@
-const classData = [
-    {ID: 'UIUX0123', kategori: 'UI/UX Design', Kelas: 'Belajar Web Designer dengan Figma', status: 'BELUM BAYAR', metode: 'Credit Card', tanggal: "21 Sep, 2023 at 2:00 A.M"},
-    {ID: 'UIUX0123', kategori: 'UI/UX Design', Kelas: 'Belajar Web Designer dengan Figma', status: 'SUDAH BAYAR', metode: '-', tanggal: "21 Sep, 2023 at 2:00 A.M"},
-    {ID: 'UIUX0123', kategori: 'UI/UX Design', Kelas: 'Belajar Web Designer dengan Figma', status: 'BELUM BAYAR', metode: 'Credit Card', tanggal: "21 Sep, 2023 at 2:00 A.M"},
+const PaymentData = [
+    {ID: 'johndoe123', kategori: 'UI/UX Design', Kelas: 'Belajar Web Designer dengan Figma', status: 'BELUM BAYAR', metode: 'Credit Card', tanggal: "21 Sep, 2023 at 2:00 A.M"},
+    {ID: 'supermanxx', kategori: 'UI/UX Design', Kelas: 'Belajar Web Designer dengan Figma', status: 'SUDAH BAYAR', metode: '-', tanggal: "21 Sep, 2023 at 2:00 A.M"},
+    {ID: 'ironman99', kategori: 'UI/UX Design', Kelas: 'Belajar Web Designer dengan Figma', status: 'BELUM BAYAR', metode: 'Credit Card', tanggal: "21 Sep, 2023 at 2:00 A.M"},
 ];
 
 function HeaderTable() {
@@ -36,7 +36,7 @@ function ClassTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {classData.map((item, index) => (
+                    {PaymentData.map((item, index) => (
                         <tr key={index} className='h-10 text-center hover:bg-gray-100 text-gray-600'>
                             <td className='px-4 py-4'>{item.ID}</td>
                             <td className='px-4 py-4'>{item.kategori}</td>
