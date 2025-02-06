@@ -24,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "Admin/keluar",
     element: <Login/>
+  },
+  {
+    path: "Belajar/login",
+    element: <Login/>
   }
 ]);
 

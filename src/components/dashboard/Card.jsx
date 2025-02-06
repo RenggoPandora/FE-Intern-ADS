@@ -7,7 +7,7 @@ const cards= [
 
 function Card({ card }) {
     return (
-        <div className={`flex items-center w-1/3 h-[150px] p-6 rounded-[25px] shadow-md ${card.type === "au" ? "bg-[#489CFF]" : card.type === "ac" ? "bg-[#73CA5C]" : "bg-[#6148FF]"} text-white`}>
+        <div className={`flex items-center w-1/3 h-[108px] p-6 rounded-[25px] shadow-md ${card.type === "au" ? "bg-[#489CFF]" : card.type === "ac" ? "bg-[#73CA5C]" : "bg-[#6148FF]"} text-white`}>
             <div className="rounded-[25px] bg-white p-3 mr-4">
                 <img src="/logocard.svg" alt="User" />
             </div>
@@ -20,11 +20,12 @@ function Card({ card }) {
 }
 export default function CardDashboard() {
   return (
+    <div className='items-center'>
     <div className='flex justify-between gap-[24px] mt-[79px] ml-[69px] mb-[54px] mr-[87px]'>
         {cards.map((card) => (
             <Card key={card.name} card={card} />
         ))}
-
+    </div>
     </div>
   );
 }

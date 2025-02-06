@@ -4,7 +4,7 @@ const Sidebar = () => {
         <div className='justify-center items-center flex'>
             <img src="/logo.svg" alt="Logo" />
         </div>
-        <ul className='mt-3'>
+        <ul className='mt-3 w-full h-[150px]'>
             <li className='font-bold text-base text-white px-8 py-4 hover:bg-[#489CFF]'>
               <a href="/Admin/dashboard" className="text-white w-full flex">Dashboard</a>
             </li>

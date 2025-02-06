@@ -1,26 +1,7 @@
-import  { useState } from 'react';
+import  { useState, useEffect } from 'react';
 import Form from './Form';
+import axios from 'axios';
 
-const ClassData = [
-    {Kode: 'UIUX0123', kategori: 'UI/UX Design', Kelas: 'Belajar Web Designer dengan Figma', Tipe: 'GRATIS', level: 'Beginner', harga: 'Rp 0', aksi: (
-        <div className='flex gap-4 w-full justify-center'>
-            <button className='bg-[#6148FF] text-white rounded-[20px] w-[50px] font-semibold'>Ubah</button>
-            <button className='bg-[#FF0000] text-white rounded-[20px] w-[50px] font-semibold'>Hapus</button>
-        </div>
-    )},
-    {Kode: 'DS0223', kategori: 'Data Science', Kelas: 'Data Cleaning untuk pemula', Tipe: 'GRATIS', level: 'Beginner', harga: 'Rp 0', aksi: (
-        <div className='flex gap-4 w-full justify-center'>
-            <button className='bg-[#6148FF] text-white rounded-[20px] w-[50px] font-semibold'>Ubah</button>
-            <button className='bg-[#FF0000] text-white rounded-[20px] w-[50px] font-semibold'>Hapus</button>
-        </div>
-    )},
-    {Kode: 'DS0323', kategori: 'Data Science', Kelas: 'Data Cleaning untuk Professional', Tipe: 'PREMIUM', level: 'Advanced', harga: 'Rp 199.000', aksi: (
-        <div className='flex gap-4 w-full justify-center'>
-            <button className='bg-[#6148FF] text-white rounded-[20px] w-[50px] font-semibold'>Ubah</button>
-            <button className='bg-[#FF0000] text-white rounded-[20px] w-[50px] font-semibold'>Hapus</button>
-        </div>
-    )},
-];
 
 function HeaderTable({ onTambahClick }) {
     return (
@@ -44,6 +25,32 @@ function HeaderTable({ onTambahClick }) {
 }
 
 function TabelKelolaKelas() {
+    const [classData, setClassData] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/class')
+      .then(response => {
+        setClassData(response.data.datas); // Ambil data dari response backend
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+  const handleDelete = (id) => {
+    if (window.confirm("Apakah Anda yakin ingin menghapus kelas ini?")) {
+        axios.delete(`http://localhost:3000/api/class/${id}`)
+            .then(() => {
+                alert("Data berhasil dihapus!");
+                // Perbarui state untuk menghapus item dari tabel
+                setClassData(prevData => prevData.filter(item => item.id !== id));
+            })
+            .catch(error => {
+                console.error("Gagal menghapus data:", error);
+                alert("Terjadi kesalahan saat menghapus data.");
+            });
+    }
+};
+
     return (
         <div className='px-8 py-4 bg-white'>
             <table className='w-full'>
@@ -59,17 +66,22 @@ function TabelKelolaKelas() {
                     </tr>
                 </thead>
                 <tbody>
-                    {ClassData.map((item, index) => (
+                    {classData.map((item, index) => (
                         <tr key={index} className='h-10 text-center hover:bg-gray-100 text-gray-600'>
-                            <td className='px-4 py-4'>{item.Kode}</td>
-                            <td className='px-4 py-4'>{item.kategori}</td>
-                            <td className='px-4 py-4 font-extrabold'>{item.Kelas}</td>
-                            <td className={`px-4 py-4 font-extrabold ${item.Tipe === 'GRATIS' ? 'text-green-400' : 'text-purple-800'}`}>
-                                {item.Tipe}
+                            <td className='px-4 py-4'>{item.code}</td>
+                            <td className='px-4 py-4'>{item.category}</td>
+                            <td className='px-4 py-4 font-semibold'>{item.name}</td>
+                            <td className={`px-4 py-4 font-semibold ${item.type === 'GRATIS' ? 'text-green-400' : 'text-purple-800'}`}>
+                                {item.type}
                             </td>
-                            <td className='px-4 py-4 font-extrabold'>{item.level}</td>
-                            <td className='px-4 py-4 font-extrabold'>{item.harga}</td>
-                            <td className='px-4 py-4'>{item.aksi}</td>
+                            <td className='px-4 py-4 font-bold'>{item.level}</td>
+                            <td className='px-4 py-4 font-bold'>{item.price}</td>
+                            <td className='px-4 py-4'>
+                                <div className='flex gap-4 w-full justify-center'>
+                                    <button className='bg-[#6148FF] text-white rounded-[20px] w-[50px] font-semibold'>Ubah</button>
+                                    <button onClick={() => handleDelete(item.id)} className='bg-[#FF0000] text-white rounded-[20px] w-[50px] font-semibold'>Hapus</button>
+                                 </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -84,8 +96,10 @@ export default function TabelKelola() {
     return (
         <div className='ml-[69px] mr-[87px]'>
             <HeaderTable onTambahClick={() => setShowForm(true)} />
+            <div className='justify-center'>
             <TabelKelolaKelas />
             {showForm && <Form onClose={() => setShowForm(false)} />}
+            </div>
         </div>
     );
 }

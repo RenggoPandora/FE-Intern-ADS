@@ -13,7 +13,7 @@ export default function Dashboard() {
         <CardDashboard />
         <TablePembayaran />
         </div>
-    </div>
+        </div>
     </div>
   )
 }

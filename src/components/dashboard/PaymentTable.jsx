@@ -6,7 +6,7 @@ const PaymentData = [
 
 function HeaderTable() {
     return (
-        <div className='flex justify-between items-center px-8 py-4 bg-white text-black'>
+        <div className='flex justify-between px-8 py-4 bg-white text-black'>
             <h2 className='text-2xl font-bold'>Status Pembayaran</h2>
             <div className='flex gap-2'>
                 <button className='px-4 py-2 bg-white border border-[#6148FF] text-[#6148FF] rounded-full hover:opacity-80 flex items-center gap-2 font-bold'>
@@ -56,9 +56,11 @@ function ClassTable() {
 
 export default function PaymentTable() {
     return (
-        <div className='ml-[69px] mr-[87px]'>
+        <div className='ml-auto mr-auto justify-center'>
             <HeaderTable />
+            
             <ClassTable />
+            
         </div>
     );
 }
