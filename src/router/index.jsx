@@ -4,6 +4,7 @@ import Dashboard from "../components/templates/Dashboard";
 import KelolaKelas from "../components/templates/KelolaKelas";
 import Layout from "../components/layouts/Layout";
 import UserLogin from "../components/templates/UserLogin";
+import Register from "../components/templates/Register";
 
 export default function Router() {
   return (
@@ -19,6 +20,8 @@ export default function Router() {
 
         
         <Route path='belajar/' element={<UserLogin/>}/>
+        <Route path='belajar/register' element={<Register/>}/>
+            
         
     </Routes>
   )

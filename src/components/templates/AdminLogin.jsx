@@ -15,7 +15,7 @@ export default function AdminLogin() {
     <div className='flex'>
     <LoginLogo />
     <div className='flex flex-col w-5/6 justify-center items-center'>
-      <Login Teks="Login" TeksPosition={"center"} idPlaceholder={"ID Admin"} passwordPlaceholder={"Password"} />
+      <Login Teks="Login" labelInput="ID Admin" idUser="idAdmin" TeksPosition={"center"} idPlaceholder={"ID Admin"} passwordPlaceholder={"Password"} />
     </div>
     </div>
     

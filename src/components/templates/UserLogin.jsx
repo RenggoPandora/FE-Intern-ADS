@@ -14,13 +14,7 @@ function UserLoginLogo() {
     return (
       <div className='flex'>
         <div className=' w-6/10'>
-        <Login Teks="Masuk" TeksPosition="left" idPlaceholder={"Contoh: johndoe@gmail.com"} passwordPlaceholder={"Masukkan Password"}/>
-        
-        <span>Belum punya akun? </span>
-        <a href="/register">
-            <span className="text-[#6148FF]">Daftar di sini</span>
-        </a>
-
+        <Login Teks="Masuk" labelInput="Email/No Telepon" idUser="Email/No Telepon"TeksPosition="left" idPlaceholder={"Contoh: johndoe@gmail.com"} passwordPlaceholder={"Masukkan Password"}/>
         </div>
         <div className=' justify-end w-4/10'>
         <UserLoginLogo />

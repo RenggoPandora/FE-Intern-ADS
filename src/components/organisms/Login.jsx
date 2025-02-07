@@ -1,4 +1,13 @@
-export default function Login({ Teks, TeksPosition, idPlaceholder, passwordPlaceholder }) {
+import { useState } from 'react';
+
+export default function Login({ Teks,labelInput, idUser, TeksPosition, idPlaceholder, passwordPlaceholder }) {
+  const [passwordType, setPasswordType] = useState("password");
+
+  // Toggle visibility of password
+  const togglePasswordVisibility = () => {
+    setPasswordType(prevType => (prevType === "password" ? "text" : "password"));
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="w-[452px]">
@@ -9,12 +18,12 @@ export default function Login({ Teks, TeksPosition, idPlaceholder, passwordPlace
         <form className="flex flex-col">
           {/* Input ID Admin */}
           <div className="mb-4">
-            <label htmlFor="idAdmin" className="block mb-2 font-medium">
-              ID Admin
+            <label htmlFor={idUser} className="block mb-2 font-medium">
+              {labelInput}
             </label>
             <input
               type="text"
-              id="idAdmin"
+              id={idUser}
               placeholder={idPlaceholder}
               className="border rounded-[20px] w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#FF0000]"
             />
@@ -22,29 +31,30 @@ export default function Login({ Teks, TeksPosition, idPlaceholder, passwordPlace
 
           {/* Input Password */}
           <div className="mb-2 relative">
-              <div className="justify-between flex">
-                  <label htmlFor="password" className="block mb-2 font-medium">
-                      Password
-                  </label>
-                  <div className="flex justify-end">
-                  <a href="/forgot-password" className="text-[#6148FF] text-sm font-medium">
-                      Lupa Kata Sandi
-                  </a>
-                  </div>
+            <div className="justify-between flex">
+              <label htmlFor="password" className="block mb-2 font-medium">
+                Password
+              </label>
+              <div className="flex justify-end">
+                <a href="/forgot-password" className="text-[#6148FF] text-sm font-medium">
+                  Lupa Kata Sandi
+                </a>
               </div>
-          
+            </div>
+
             <div className="relative">
               <input
-                type="password"
+                type={passwordType}
                 id="password"
                 placeholder={passwordPlaceholder}
                 className="border rounded-[20px] w-full py-3 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FF0000]"
               />
-              {/* Ikon Mata (Silakan ganti src sesuai dengan ikon Anda) */}
+              {/* Ikon Mata */}
               <img
-                src="/eye.svg"
-                alt="show password"
+                src={passwordType === "password" ? "/eye.svg" : "/eye.svg"} // Sesuaikan dengan ikon mata terbuka/tutup
+                alt="toggle password visibility"
                 className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
+                onClick={togglePasswordVisibility}
               />
             </div>
           </div>
@@ -58,14 +68,13 @@ export default function Login({ Teks, TeksPosition, idPlaceholder, passwordPlace
 
           {/* Conditional rendering for the "Belum punya akun?" section */}
           {TeksPosition === "left" && (
-            <div className="mt-4 text-left">
+            <div className="mt-4 justify-center text-center">
               <span>Belum punya akun? </span>
-              <a href="/register">
-                  <span className="text-[#6448FF]">Daftar di sini</span>
+              <a href="belajar/register">
+                <span className="text-[#6448FF]">Daftar di sini</span>
               </a>
             </div>
           )}
-
         </form>
       </div>
     </div>
