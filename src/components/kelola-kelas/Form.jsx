@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Form({ onClose, callback }) {
+
+export default function Form({ onClose, callback, data }) {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -12,6 +13,12 @@ export default function Form({ onClose, callback }) {
     content: ""
   });
 
+  useEffect(() => {
+    if (data) {
+      setFormData(data);
+    }
+  }, [data]);
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -19,25 +26,21 @@ export default function Form({ onClose, callback }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/class", formData);
-      if (response.status >= 200 && response.status < 300) {
-        alert("Data kelas berhasil ditambahkan!");
-        onClose();
-        if (callback && typeof callback === "function") {
-          callback();
-        }
-      }
-    } catch (error) {
-      if (error.response) {
-        console.error("Error dari server:", error.response.data);
-        alert(`Gagal menambahkan data kelas: ${error.response.data.message || 'Kesalahan tidak diketahui'}`);
-      } else if (error.request) {
-        console.error("Tidak ada respons dari server:", error.request);
-        alert("Tidak ada respons dari server. Periksa koneksi Anda.");
+      if (data) {
+        // Update data jika sedang mengedit
+        await axios.patch(`http://localhost:3000/api/class/${data.id}`, formData);
+        alert("Data kelas berhasil diperbarui!");
       } else {
-        console.error("Terjadi kesalahan:", error.message);
-        alert(`Kesalahan: ${error.message}`);
+        // Tambahkan data baru jika tidak ada data yang sedang diedit
+        await axios.post("http://localhost:3000/api/class", formData);
+        alert("Data kelas berhasil ditambahkan!");
       }
+      if (callback && typeof callback === "function") {
+        callback();
+      }
+      onClose();
+    } catch (error) {
+      alert("Terjadi kesalahan: " + error.message);
     }
   };
   
@@ -53,7 +56,7 @@ export default function Form({ onClose, callback }) {
 
         {/* Title */}
         <h1 className="text-[#6148FF] font-bold text-2xl text-center mb-6">
-          Tambah Kelas
+        {data ? "Edit Kelas" : "Tambah Kelas"}
         </h1>
 
         {/* Form */}
@@ -73,7 +76,7 @@ export default function Form({ onClose, callback }) {
               <input
                 type="text"
                 name={field.name}
-                value={formData[field.name]}
+                value={formData[field.name] || ""}
                 onChange={handleChange}
                 placeholder={`Masukkan ${field.label.toLowerCase()}`}
                 className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"

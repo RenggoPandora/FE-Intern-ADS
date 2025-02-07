@@ -3,6 +3,7 @@ import AdminLogin from "../components/templates/AdminLogin";
 import Dashboard from "../components/templates/Dashboard";
 import KelolaKelas from "../components/templates/KelolaKelas";
 import Layout from "../components/layouts/Layout";
+import UserLogin from "../components/templates/UserLogin";
 
 export default function Router() {
   return (
@@ -15,6 +16,10 @@ export default function Router() {
                 <Route path='kelola-kelas' element={<KelolaKelas/>}/>
             </Route>
         </Route>
+
+        
+        <Route path='belajar/' element={<UserLogin/>}/>
+        
     </Routes>
   )
 }

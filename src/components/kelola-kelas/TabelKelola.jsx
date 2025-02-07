@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function TabelKelola() {
   const [classData, setClassData] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [selectedClass, setSelectedClass] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -34,8 +35,15 @@ export default function TabelKelola() {
     }
   };
 
+  const handleEdit = (item) => {
+      setSelectedClass(item);
+      setShowForm(true);
+  };
+
+
   const handleCloseForm = () => {
     setShowForm(false);
+    setSelectedClass(null);
     fetchData();
   };
 
@@ -86,7 +94,7 @@ export default function TabelKelola() {
                 <td className='px-4 py-4 font-bold'>{item.price}</td>
                 <td className='px-4 py-4'>
                   <div className='flex gap-4 w-full justify-center'>
-                    <button className='bg-[#6148FF] text-white rounded-[20px] w-[50px] font-semibold'>Ubah</button>
+                    <button onClick={() => handleEdit(item)} className='bg-[#6148FF] text-white rounded-[20px] w-[50px] font-semibold'>Ubah</button>
                     <button onClick={() => handleDelete(item.id)} className='bg-[#FF0000] text-white rounded-[20px] w-[50px] font-semibold'>Hapus</button>
                   </div>
                 </td>
@@ -96,7 +104,7 @@ export default function TabelKelola() {
         </table>
       </div>
 
-      {showForm && <Form onClose={handleCloseForm} />}
+      {showForm && <Form onClose={handleCloseForm} data={selectedClass} />}
     </div>
   );
 }
