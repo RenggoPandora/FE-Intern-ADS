@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function Form({ onClose }) {
+export default function Form({ onClose, callback }) {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -16,23 +16,36 @@ export default function Form({ onClose }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Mencegah reload halaman
-    axios
-      .post("http://localhost:3000/api/class", formData)
-      .then(() => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/api/class", formData);
+      if (response.status >= 200 && response.status < 300) {
         alert("Data kelas berhasil ditambahkan!");
-        onClose(); // Tutup form setelah submit
-      })
-      .catch((error) => {
-        console.error("Terjadi kesalahan:", error);
-        alert("Gagal menambahkan data kelas.");
-      });
+        onClose();
+        if (callback && typeof callback === "function") {
+          callback();
+        }
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error("Error dari server:", error.response.data);
+        alert(`Gagal menambahkan data kelas: ${error.response.data.message || 'Kesalahan tidak diketahui'}`);
+      } else if (error.request) {
+        console.error("Tidak ada respons dari server:", error.request);
+        alert("Tidak ada respons dari server. Periksa koneksi Anda.");
+      } else {
+        console.error("Terjadi kesalahan:", error.message);
+        alert(`Kesalahan: ${error.message}`);
+      }
+    }
   };
+  
+  
 
   return (
     <div className="flex justify-center items-center align-center w-full h-screen backdrop-brightness-20 fixed top-0 left-0">
-      <div className="bg-white w-[750px] h-[853px] p-10 overflow-scroll rounded-3xl shadow-xl relative">
+      <div className="bg-white max-h-screen overflow-y-scroll overflow-hidden scrollbar-none rounded-3xl relative px-[50px] py-[50px]">
         {/* Close Button */}
         <button className="absolute top-4 right-4" onClick={onClose}>
           <img src="/Close.svg" alt="Close" />
@@ -63,7 +76,7 @@ export default function Form({ onClose }) {
                 value={formData[field.name]}
                 onChange={handleChange}
                 placeholder={`Masukkan ${field.label.toLowerCase()}`}
-                className="border rounded-[20px] w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
+                className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
               />
             </div>
           ))}
@@ -77,7 +90,7 @@ export default function Form({ onClose }) {
               value={formData.content}
               onChange={handleChange}
               placeholder="Masukkan materi"
-              className="border rounded-[20px] w-full py-2 px-4 h-24 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
+              className="border rounded-[20px] w-[450px] py-2 px-4 h-24 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
             />
           </div>
 
