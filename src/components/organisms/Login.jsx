@@ -61,7 +61,7 @@ export default function Login({ Teks,labelInput, idUser, TeksPosition, idPlaceho
 
           {/* Tombol Masuk */}
           <button className="bg-[#6148FF] text-white rounded-[30px] py-4 font-semibold flex w-full justify-center mt-5">
-            <a href={TeksPosition === "left" ? "/belajar/beranda" : "/admin/dashboard"} className="text-white w-full justify-center">
+            <a href={TeksPosition === "left" ? "belajar/beranda" : "/admin/dashboard"} className="text-white w-full justify-center">
               Masuk
             </a>
           </button>
