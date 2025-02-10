@@ -1,14 +1,17 @@
+import Category from "../organisms/Category";
 import Hero from "../organisms/Hero";
 import Navbar from "../organisms/Navbar";
+import PopularCourse from "../organisms/PopularCourse";
 
 export default function Beranda() {
   return (
-    <div>
+    
     <div className='flex-col'>
 
         <Navbar/>
-        </div>
         <Hero/>
+        <Category/>
+        <PopularCourse/>
     </div>
   )
 }
