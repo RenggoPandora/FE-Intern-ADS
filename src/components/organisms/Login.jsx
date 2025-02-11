@@ -1,11 +1,22 @@
-import { useState } from 'react';
-
-export default function Login({ Teks,labelInput, idUser, TeksPosition, idPlaceholder, passwordPlaceholder }) {
+import { useState } from "react";
+export default function Login({
+  Teks,
+  labelInput,
+  idUser,
+  TeksPosition,
+  idPlaceholder,
+  passwordPlaceholder,
+  onSubmit, // Add onSubmit prop
+  setEmail, // Add setEmail prop
+  setPassword, // Add setPassword prop
+  error, // Add error prop
+}) {
+  // State to manage password visibility
   const [passwordType, setPasswordType] = useState("password");
 
   // Toggle visibility of password
   const togglePasswordVisibility = () => {
-    setPasswordType(prevType => (prevType === "password" ? "text" : "password"));
+    setPasswordType((prevType) => (prevType === "password" ? "text" : "password"));
   };
 
   return (
@@ -15,7 +26,7 @@ export default function Login({ Teks,labelInput, idUser, TeksPosition, idPlaceho
         <div className={`${TeksPosition === "left" ? "text-left" : "text-center"} text-[#6148FF] text-2xl font-bold mb-8`}>
           {Teks}
         </div>
-        <form className="flex flex-col">
+        <form className="flex flex-col" onSubmit={onSubmit}> {/* Handle submit here */}
           {/* Input ID Admin */}
           <div className="mb-4">
             <label htmlFor={idUser} className="block mb-2 font-medium">
@@ -26,6 +37,7 @@ export default function Login({ Teks,labelInput, idUser, TeksPosition, idPlaceho
               id={idUser}
               placeholder={idPlaceholder}
               className="border rounded-[20px] w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#FF0000]"
+              onChange={(e) => setEmail(e.target.value)} // Handle email change
             />
           </div>
 
@@ -48,6 +60,7 @@ export default function Login({ Teks,labelInput, idUser, TeksPosition, idPlaceho
                 id="password"
                 placeholder={passwordPlaceholder}
                 className="border rounded-[20px] w-full py-3 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FF0000]"
+                onChange={(e) => setPassword(e.target.value)} // Handle password change
               />
               {/* Ikon Mata */}
               <img
@@ -59,11 +72,12 @@ export default function Login({ Teks,labelInput, idUser, TeksPosition, idPlaceho
             </div>
           </div>
 
+          {/* Display error message */}
+          {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+
           {/* Tombol Masuk */}
-          <button className="bg-[#6148FF] text-white rounded-[30px] py-4 font-semibold flex w-full justify-center mt-5">
-            <a href={TeksPosition === "left" ? "belajar/beranda" : "/admin/dashboard"} className="text-white w-full justify-center">
-              Masuk
-            </a>
+          <button type="submit" className="bg-[#6148FF] text-white rounded-[30px] py-4 font-semibold flex w-full justify-center mt-5">
+            Masuk
           </button>
 
           {/* Conditional rendering for the "Belum punya akun?" section */}

@@ -42,7 +42,7 @@ export default function PopularCourse() {
   }
 
   return (
-    <div className="popular-courses">
+    <div className="popular-courses px-[240px] mt-[10px] mb-[4px]">
       <h2 className="text-xl font-bold">Kursus Populer</h2>
 
       {/* Filter Kategori */}

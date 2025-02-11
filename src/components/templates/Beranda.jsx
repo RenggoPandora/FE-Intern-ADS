@@ -6,7 +6,7 @@ import PopularCourse from "../organisms/PopularCourse";
 export default function Beranda() {
   return (
     
-    <div className='flex-col'>
+    <div className='flex-col overflow-hidden'>
 
         <Navbar/>
         <Hero/>

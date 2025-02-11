@@ -1,5 +1,7 @@
 import UserLoginLogo from "../molecules/UserLoginLogo";
 import { useState } from "react";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 export default function Register() {
   const [passwordType, setPasswordType] = useState("password");
@@ -7,24 +9,50 @@ export default function Register() {
   const [passwordValid, setPasswordValid] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  const navigate = useNavigate(); // Inisialisasi useNavigate
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: ""
+  });
+
   // Toggle visibility of password
   const togglePasswordVisibility = () => {
     setPasswordType(prevType => (prevType === "password" ? "text" : "password"));
   };
 
-  // Handle password input change
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-    setPasswordValid(value.length >= 8);
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({
+      ...formData,
+      [id]: value
+    });
+
+    if (id === "password") {
+      setPassword(value);
+      setPasswordValid(value.length >= 8);
+    }
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submit
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setFormSubmitted(true);
 
     if (passwordValid) {
-      alert("Pendaftaran berhasil!");
+      try {
+        const response = await axios.post('http://localhost:3000/api/register', formData);
+        alert(response.data.message);
+        
+        // Alihkan ke halaman /belajar jika berhasil
+        navigate('/belajar');
+      } catch (error) {
+        console.error(error);
+        alert("Pendaftaran gagal, silakan coba lagi.");
+      }
     } else {
       alert("Password minimal 8 karakter");
     }
@@ -40,15 +68,17 @@ export default function Register() {
             </div>
             <form className='flex flex-col' onSubmit={handleSubmit}>
               <div className='mb-4'>
-                <label htmlFor='username' className='block mb-2 font-medium'>
+                <label htmlFor='name' className='block mb-2 font-medium'>
                   Nama
                 </label>
                 <div className="relative">
                   <input 
                     type='text'
-                    id='username'
+                    id='name'
                     placeholder='Nama Lengkap'
                     className="border rounded-[20px] w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#FF0000]"
+                    value={formData.name}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
@@ -63,35 +93,25 @@ export default function Register() {
                     id='email'
                     placeholder='Contoh : Johndee@gmail.com'
                     className="border rounded-[20px] w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#FF0000]"
+                    value={formData.email}
+                    onChange={handleInputChange}
                   />
-                  {formSubmitted && (
-                    <img
-                      src="/VALID.svg"
-                      alt="valid input"
-                      className="absolute top-1/2 right-4 transform -translate-y-1/2"
-                    />
-                  )}
                 </div>
               </div>
 
               <div className='mb-4'>
-                <label htmlFor='number' className='block mb-2 font-medium'>
+                <label htmlFor='phone' className='block mb-2 font-medium'>
                   Nomor Telepon
                 </label>
                 <div className="relative">
                   <input 
                     type='text'
-                    id='number'
+                    id='phone'
                     placeholder='+62.'
                     className="border rounded-[20px] w-full py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#FF0000]"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                   />
-                  {formSubmitted && (
-                    <img
-                      src="/VALID.svg"
-                      alt="valid input"
-                      className="absolute top-1/2 right-4 transform -translate-y-1/2"
-                    />
-                  )}
                 </div>
               </div>
 
@@ -106,9 +126,8 @@ export default function Register() {
                         placeholder="Buat Password"
                         className="border rounded-[20px] w-full py-3 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FF0000]"
                         value={password}
-                        onChange={handlePasswordChange}
+                        onChange={handleInputChange}
                     />
-                    {/* Icon validasi password hanya muncul setelah form submitted */}
                     {formSubmitted && (
                       <img
                           src={passwordValid ? "/VALID.svg" : "/X.svg"}
@@ -116,7 +135,6 @@ export default function Register() {
                           className="absolute top-1/2 right-12 transform -translate-y-1/2"
                       />
                     )}
-                    {/* Icon toggle password visibility bisa digunakan kapan saja */}
                     <img
                         src={passwordType === 'password' ? '/eye.svg' : '/eye.svg'}
                         alt="toggle visibility"
