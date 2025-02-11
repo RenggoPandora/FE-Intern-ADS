@@ -34,7 +34,7 @@ export default function CardClass({ title, instructor, category, rating, level, 
                 <div className="mt-4">
                     <button className="flex justify-between items-center w-full bg-[#6148FF] text-white px-4 py-2 rounded-lg font-semibold">
                         <span className="flex items-center gap-2">💎 Beli</span>
-                        <p className="font-bold text-white">Rp {price.toLocaleString()}</p>
+                        <p className="font-bold text-white">{price.toLocaleString()}</p>
                     </button>
                 </div>
             </div>

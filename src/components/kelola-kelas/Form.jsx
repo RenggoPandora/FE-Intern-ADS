@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-
 export default function Form({ onClose, callback, data }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -10,15 +9,24 @@ export default function Form({ onClose, callback, data }) {
     type: "",
     level: "",
     price: "",
-    content: ""
+    content: "",
   });
 
+  // Mengatur nilai form ketika data tersedia (untuk mengedit)
   useEffect(() => {
     if (data) {
-      setFormData(data);
+      setFormData({
+        name: data.name || "",
+        category: data.category?.category || "",  // Menyertakan kategori jika ada
+        code: data.code || "",
+        type: data.type || "",
+        level: data.level || "",
+        price: data.price || "",
+        content: data.content || "",
+      });
     }
   }, [data]);
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -35,6 +43,7 @@ export default function Form({ onClose, callback, data }) {
         await axios.post("http://localhost:3000/api/class", formData);
         alert("Data kelas berhasil ditambahkan!");
       }
+
       if (callback && typeof callback === "function") {
         callback();
       }
@@ -43,8 +52,6 @@ export default function Form({ onClose, callback, data }) {
       alert("Terjadi kesalahan: " + error.message);
     }
   };
-  
-  
 
   return (
     <div className="flex justify-center items-center align-center w-full h-screen backdrop-brightness-20 fixed top-0 left-0">
@@ -56,12 +63,12 @@ export default function Form({ onClose, callback, data }) {
 
         {/* Title */}
         <h1 className="text-[#6148FF] font-bold text-2xl text-center mb-6">
-        {data ? "Edit Kelas" : "Tambah Kelas"}
+          {data ? "Edit Kelas" : "Tambah Kelas"}
         </h1>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col">
-          {[
+          {[ 
             { name: "name", label: "Nama Kelas" },
             { name: "category", label: "Kategori" },
             { name: "code", label: "Kode Kelas" },
@@ -84,8 +91,9 @@ export default function Form({ onClose, callback, data }) {
             </div>
           ))}
 
+          {/* Content */}
           <div className="mb-4">
-            <label htmlFor="materi" className="block mb-2 font-medium">
+            <label htmlFor="content" className="block mb-2 font-medium">
               Materi
             </label>
             <textarea

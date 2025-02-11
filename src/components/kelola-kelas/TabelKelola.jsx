@@ -85,7 +85,7 @@ export default function TabelKelola() {
             {classData.map((item) => (
               <tr key={item.id} className='h-10 text-center hover:bg-gray-100 text-gray-600'>
                 <td className='px-4 py-4'>{item.code}</td>
-                <td className='px-4 py-4'>{item.category}</td>
+                <td className='px-4 py-4'>{item.category?.category || 'Tidak ada kategori'}</td>
                 <td className='px-4 py-4 font-semibold'>{item.name}</td>
                 <td className={`px-4 py-4 font-semibold ${item.type === 'GRATIS' ? 'text-green-400' : 'text-purple-800'}`}>
                   {item.type}
