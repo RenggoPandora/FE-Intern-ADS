@@ -3,7 +3,7 @@ export default function Input({ placeholder }) {
       <input
         type="text"
         placeholder={placeholder}
-        className="px-2 py-1 text-[#8A8A8A] bg-transparent focus:outline-none"
+        className="px-3 py-1 ml-[16px] text-[#8A8A8A] bg-transparent focus:outline-none"
       />
     );
   }
