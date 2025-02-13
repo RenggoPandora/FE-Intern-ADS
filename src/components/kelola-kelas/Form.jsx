@@ -89,29 +89,22 @@ export default function Form({ onClose, callback, data }) {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col">
-          {[ 
-            { name: "name", label: "Nama Kelas" },
-            { name: "code", label: "Kode Kelas" },
-            { name: "type", label: "Tipe Kelas" },
-            { name: "level", label: "Level" },
-            { name: "price", label: "Harga" },
-          ].map((field, index) => (
-            <div key={index} className="mb-4">
-              <label htmlFor={field.name} className="block mb-2 font-medium">
-                {field.label}
-              </label>
-              <input
-                type="text"
-                name={field.name}
-                value={formData[field.name] || ""}
-                onChange={handleChange}
-                placeholder={`Masukkan ${field.label.toLowerCase()}`}
-                className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
-              />
-            </div>
-          ))}
+          {/* Nama Kelas */}
+          <div className="mb-4">
+            <label htmlFor="name" className="block mb-2 font-medium">
+              Nama Kelas
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name || ""}
+              onChange={handleChange}
+              placeholder="Masukkan nama kelas"
+              className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
+            />
+          </div>
 
-          {/* Category (Dropdown) */}
+          {/* Kategori (Dropdown) */}
           <div className="mb-4">
             <label htmlFor="category" className="block mb-2 font-medium">
               Kategori
@@ -122,7 +115,7 @@ export default function Form({ onClose, callback, data }) {
               onChange={handleChange}
               className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
             >
-              <option value="">Pilih Kategori</option>
+              <option className='text-[#8A8A8A]'value="">Pilih Kategori</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.category}
@@ -131,7 +124,69 @@ export default function Form({ onClose, callback, data }) {
             </select>
           </div>
 
-          {/* Content */}
+          {/* Kode Kelas */}
+          <div className="mb-4">
+            <label htmlFor="code" className="block mb-2 font-medium">
+              Kode Kelas
+            </label>
+            <input
+              type="text"
+              name="code"
+              value={formData.code || ""}
+              onChange={handleChange}
+              placeholder="Masukkan kode kelas"
+              className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
+            />
+          </div>
+
+          {/* Tipe Kelas */}
+          <div className="mb-4">
+            <label htmlFor="type" className="block mb-2 font-medium">
+              Tipe Kelas
+            </label>
+            <select
+              name="type"
+              value={formData.type || ""}
+              onChange={handleChange}
+              className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
+            >
+              <option className='text-[#8A8A8A]' value="">Pilih Tipe Kelas</option>
+              <option value="GRATIS">Gratis</option>
+              <option value="PREMIUM">Premium</option>
+            </select>
+          </div>
+
+          {/* Level */}
+          <div className="mb-4">
+            <label htmlFor="level" className="block mb-2 font-medium">
+              Level
+            </label>
+            <input
+              type="text"
+              name="level"
+              value={formData.level || ""}
+              onChange={handleChange}
+              placeholder="Masukkan level kelas"
+              className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
+            />
+          </div>
+
+          {/* Harga */}
+          <div className="mb-4">
+            <label htmlFor="price" className="block mb-2 font-medium">
+              Harga
+            </label>
+            <input
+              type="text"
+              name="price"
+              value={formData.price || ""}
+              onChange={handleChange}
+              placeholder="Masukkan harga"
+              className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
+            />
+          </div>
+
+          {/* Materi */}
           <div className="mb-4">
             <label htmlFor="content" className="block mb-2 font-medium">
               Materi

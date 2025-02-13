@@ -94,8 +94,8 @@ export default function TabelKelola() {
                 <td className='px-4 py-4 font-bold'>{item.price}</td>
                 <td className='px-4 py-4'>
                   <div className='flex gap-4 w-full justify-center'>
-                    <button onClick={() => handleEdit(item)} className='bg-[#6148FF] text-white rounded-[20px] w-[50px] font-semibold'>Ubah</button>
-                    <button onClick={() => handleDelete(item.id)} className='bg-[#FF0000] text-white rounded-[20px] w-[50px] font-semibold'>Hapus</button>
+                    <button onClick={() => handleEdit(item)} className='bg-[#6148FF] text-white rounded-[20px] w-[50px] font-semibold cursor-pointer'>Ubah</button>
+                    <button onClick={() => handleDelete(item.id)} className='bg-[#FF0000] text-white rounded-[20px] w-[50px] font-semibold cursor-pointer'>Hapus</button>
                   </div>
                 </td>
               </tr>

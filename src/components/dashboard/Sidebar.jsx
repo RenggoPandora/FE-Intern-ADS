@@ -12,6 +12,9 @@ const Sidebar = () => {
              <a href="/admin/kelola-kelas" className="text-white w-full flex">Kelola Kelas</a>
             </li>
             <li className='font-bold text-base text-white px-8 py-4 hover:bg-[#489CFF]'>
+             <a href="/admin/category" className="text-white w-full flex">Kelola Kategori</a>
+            </li>
+            <li className='font-bold text-base text-white px-8 py-4 hover:bg-[#489CFF]'>
              <a href="/admin/login" className="text-white w-full flex">Keluar</a>
             </li>
         </ul>

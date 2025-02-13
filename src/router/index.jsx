@@ -7,6 +7,7 @@ import Register from "../components/templates/Register";
 import Beranda from "../components/templates/Beranda";
 import AdminLogin from "../components/templates/AdminLogin";
 import Classes from "../components/templates/Classes";
+import ManageCategory from "../components/templates/ManageCategory";
 
 export default function Router() {
   return (
@@ -23,6 +24,8 @@ export default function Router() {
             <Route path='admin/' element={<Layout/>}>
                 <Route path='dashboard' element={<Dashboard/>}/> 
                 <Route path='kelola-kelas' element={<KelolaKelas/>}/>
+                <Route path='dashboard' element={<Dashboard/>}/> 
+                <Route path='category' element={<ManageCategory/>}/>
             </Route>
         </Route>
 
