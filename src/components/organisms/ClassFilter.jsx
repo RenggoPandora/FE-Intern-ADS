@@ -3,7 +3,7 @@ import CustomCheckbox from "../atoms/CustomCheckbox";
 
 export default function ClassFilter() {
   return (
-    <div className='flex-col border-transparent rounded-2xl bg-white w-1/2 pt-2.5 pr-20 pl-6 pb-2.5'>
+    <div className='flex-col border-transparent rounded-2xl bg-white w-1/2 pt-2.5 pr-20 pl-6 pb-2.5 h-fit'>
         <div className='text-base font-bold pb-2.5'>
             Filter
         </div>
@@ -48,7 +48,7 @@ export default function ClassFilter() {
             Level Kesulitan
         </div>
 
-        <div className='flex-col gap-[15px] mb-[10px] '>
+        <div className='flex-col gap-[15px] mb-[10px] pb-8 '>
             <div>
                 <CustomCheckbox label='Semua Level'/>    
             </div>
@@ -61,6 +61,10 @@ export default function ClassFilter() {
             <div>
                 <CustomCheckbox label='Advanced Level' />    
             </div>
+        </div>
+
+        <div className='justify-center text-center items-center cursor-pointer w-full h-11 mt-2.5'>
+            <button className='text-red-500 cursor pointer text-[12px]'>Hapus Filter</button>
         </div>
 
     </div>

@@ -1,4 +1,5 @@
-import ClassType from "../molecules/ClassType";
+
+import CheckedClass from "../organisms/CheckedClass";
 import ClassFilter from "../organisms/ClassFilter";
 import HeaderHome from "../organisms/HeaderHome";
 import { NavbarHome } from "../organisms/NavbarHome";
@@ -12,7 +13,8 @@ export default function Classes() {
             <div className='flex justify-between'>
                 <ClassFilter/>
                 <div className='juistify-between flex-col w-full ml-14'>
-                    <ClassType/>
+                    
+                    <CheckedClass/>
                 </div>
             </div>
         </div>
