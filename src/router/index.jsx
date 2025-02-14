@@ -12,26 +12,19 @@ import ManageCategory from "../components/templates/ManageCategory";
 export default function Router() {
   return (
     <Routes>
-        <Route path='/'>
-        <Route path='belajar/beranda' element={<Beranda/>}/>
-        <Route path='belajar' element={<UserLogin/>}/>
-        <Route path='belajar/register' element={<Register/>}/>
-        <Route path='belajar/classes' element={<Classes/>}/>
+        <Route path="/" element={<Beranda/>}/>
+        <Route path='/belajar' element={<UserLogin/>}/>
+        <Route path='/belajar/register' element={<Register/>}/>
+        <Route path='/belajar/classes' element={<Classes/>}/>
         
 
-        <Route index element={<Beranda/>}/>
-        <Route path='admin/login' element={<AdminLogin/>}/>
+        <Route path='/admin/login' element={<AdminLogin/>}/>
             <Route path='admin/' element={<Layout/>}>
                 <Route path='dashboard' element={<Dashboard/>}/> 
                 <Route path='kelola-kelas' element={<KelolaKelas/>}/>
                 <Route path='dashboard' element={<Dashboard/>}/> 
                 <Route path='category' element={<ManageCategory/>}/>
             </Route>
-        </Route>
-
-        
-            
-        
     </Routes>
   )
 }
