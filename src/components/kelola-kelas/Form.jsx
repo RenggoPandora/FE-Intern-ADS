@@ -18,7 +18,7 @@ export default function Form({ onClose, callback, data }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://be-intern-ads.vercel.app//api/category");
+        const response = await axios.get("https://be-intern-ads.vercel.app/api/category");
         setCategories(response.data.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -57,11 +57,11 @@ export default function Form({ onClose, callback, data }) {
 
       if (data) {
         // Update data if editing
-        await axios.patch(`https://be-intern-ads.vercel.app//api/class/${data.id}`, requestData);
+        await axios.patch(`https://be-intern-ads.vercel.app/api/class/${data.id}`, requestData);
         alert("Data kelas berhasil diperbarui!");
       } else {
         // Add new data if not editing
-        await axios.post("https://be-intern-ads.vercel.app//api/class", requestData);
+        await axios.post("https://be-intern-ads.vercel.app/api/class", requestData);
         alert("Data kelas berhasil ditambahkan!");
       }
 

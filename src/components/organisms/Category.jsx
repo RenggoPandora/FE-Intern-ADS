@@ -8,7 +8,7 @@ export default function Category() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("https://be-intern-ads.vercel.app//api/category"); // Pastikan URL lengkap
+        const response = await fetch("https://be-intern-ads.vercel.app/api/category"); // Pastikan URL lengkap
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

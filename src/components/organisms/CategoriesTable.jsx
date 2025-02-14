@@ -13,7 +13,7 @@ export default function CategoriesTable() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://be-intern-ads.vercel.app//api/category');
+            const response = await axios.get('https://be-intern-ads.vercel.app/api/category');
             if (response.data && response.data.data) {
                 setCategories(response.data.data);
             }
@@ -25,7 +25,7 @@ export default function CategoriesTable() {
     const HandleDelete = async (id) => {
         if (window.confirm('Apakah Anda yakin ingin menghapus kategori ini?')) {
             try {
-                await axios.delete(`https://be-intern-ads.vercel.app//api/category/${id}`);
+                await axios.delete(`https://be-intern-ads.vercel.app/api/category/${id}`);
                 alert('Data berhasil dihapus!');
                 setCategories(prevData => prevData.filter(item => item.id !== id));
             } catch (error) {
