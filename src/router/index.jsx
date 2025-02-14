@@ -13,18 +13,19 @@ export default function Router() {
   return (
     <Routes>
         <Route path="/" element={<Beranda/>}/>
-        <Route path='/belajar' element={<UserLogin/>}/>
-        <Route path='/belajar/register' element={<Register/>}/>
-        <Route path='/belajar/classes' element={<Classes/>}/>
+        <Route path="/belajar" element={<UserLogin/>}/>
+        <Route path="/belajar/register" element={<Register/>}/>
+        <Route path="/belajar/classes" element={<Classes/>}/>
         
 
-        <Route path='/admin/login' element={<AdminLogin/>}/>
-            <Route path='admin/' element={<Layout/>}>
-                <Route path='dashboard' element={<Dashboard/>}/> 
-                <Route path='kelola-kelas' element={<KelolaKelas/>}/>
-                <Route path='dashboard' element={<Dashboard/>}/> 
-                <Route path='category' element={<ManageCategory/>}/>
-            </Route>
+        <Route path="/admin/login" element={<AdminLogin/>}/>
+
+        <Route path="/admin" element={<Layout/>}>
+            <Route path="dashboard" element={<Dashboard/>}/> 
+            <Route path="kelola-kelas" element={<KelolaKelas/>}/>
+            <Route path="dashboard" element={<Dashboard/>}/> 
+            <Route path="category" element={<ManageCategory/>}/>
+        </Route>
     </Routes>
   )
 }
