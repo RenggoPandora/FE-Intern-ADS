@@ -14,7 +14,7 @@ export default function Router() {
     <Routes>
         <Route path='/'>
         <Route path='belajar/beranda' element={<Beranda/>}/>
-        <Route path='belajar/' element={<UserLogin/>}/>
+        <Route path='belajar' element={<UserLogin/>}/>
         <Route path='belajar/register' element={<Register/>}/>
         <Route path='belajar/classes' element={<Classes/>}/>
         
