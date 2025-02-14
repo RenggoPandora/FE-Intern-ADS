@@ -13,7 +13,7 @@ export default function TabelKelola() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/class");
+      const response = await axios.get("https://be-intern-ads.vercel.app//api/class");
       if (response.data && response.data.datas) {
         setClassData(response.data.datas);
       }
@@ -25,7 +25,7 @@ export default function TabelKelola() {
   const handleDelete = async (id) => {
     if (window.confirm("Apakah Anda yakin ingin menghapus kelas ini?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/class/${id}`);
+        await axios.delete(`https://be-intern-ads.vercel.app//api/class/${id}`);
         alert("Data berhasil dihapus!");
         setClassData(prevData => prevData.filter(item => item.id !== id));
       } catch (error) {
