@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Form from '../kelola-kelas/Form';
+import FormCategory from '../molecules/FormCategory';
 import axios from 'axios';
 
 export default function CategoriesTable() {
@@ -13,7 +13,7 @@ export default function CategoriesTable() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://be-intern-ads.vercel.app/api/category');
+            const response = await axios.get('http://localhost:3000/api/category');
             if (response.data && response.data.data) {
                 setCategories(response.data.data);
             }
@@ -25,7 +25,7 @@ export default function CategoriesTable() {
     const HandleDelete = async (id) => {
         if (window.confirm('Apakah Anda yakin ingin menghapus kategori ini?')) {
             try {
-                await axios.delete(`https://be-intern-ads.vercel.app/api/category/${id}`);
+                await axios.delete(`http://localhost:3000/api/category/${id}`);
                 alert('Data berhasil dihapus!');
                 setCategories(prevData => prevData.filter(item => item.id !== id));
             } catch (error) {
@@ -78,7 +78,7 @@ export default function CategoriesTable() {
                     <tbody>
                         {categories.map((item) => (
                             <tr key={item.id} className='h-10 text-center hover:bg-gray-100 text-gray-600'>
-                                <td className='px-4 py-4'>{item.category}</td>
+                                <td className='px-4 py-4'>{item.name}</td>
                                 <td className='px-4 py-4'>
                                     <div className='flex gap-2 w-full justify-center'>
                                         <button
@@ -99,7 +99,7 @@ export default function CategoriesTable() {
                 </table>
             </div>
             
-            {showForm && <Form onClose={HandleCloseForm} data={selectedCategory} />}
+            {showForm && <FormCategory onClose={HandleCloseForm} data={selectedCategory} />}
         </div>
     );
 }

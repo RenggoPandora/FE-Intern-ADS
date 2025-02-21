@@ -22,7 +22,7 @@ export default function UserLogin() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://be-intern-ads.vercel.app/api/login", {
+      const response = await axios.post("http://localhost:3000/api/login", {
         email,
         password,
       });

@@ -13,8 +13,8 @@ export default function PopularCourse() {
     const fetchData = async () => {
       try {
         setLoading(true);  // Set loading true saat memulai fetch
-        const classResponse = await axios.get('https://be-intern-ads.vercel.app/api/class');  // Sesuaikan dengan endpoint yang benar
-        const categoryResponse = await axios.get('https://be-intern-ads.vercel.app/api/category');  // Endpoint kategori
+        const classResponse = await axios.get('http://localhost:3000/api/class');  // Sesuaikan dengan endpoint yang benar
+        const categoryResponse = await axios.get('http://localhost:3000/api/category');  // Endpoint kategori
 
         if (classResponse.data && categoryResponse.data) {
           setClasses(classResponse.data.datas);  // Menyimpan data kelas

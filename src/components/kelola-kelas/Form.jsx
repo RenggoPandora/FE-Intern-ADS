@@ -4,7 +4,7 @@ import axios from "axios";
 export default function Form({ onClose, callback, data }) {
   const [formData, setFormData] = useState({
     name: "",
-    category: "",
+    categoryId: "",
     code: "",
     type: "",
     level: "",
@@ -18,7 +18,7 @@ export default function Form({ onClose, callback, data }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://be-intern-ads.vercel.app/api/category");
+        const response = await axios.get("http://localhost:3000/api/category");
         setCategories(response.data.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -33,7 +33,7 @@ export default function Form({ onClose, callback, data }) {
     if (data) {
       setFormData({
         name: data.name || "",
-        category: data.category?.id || "",  // Use category ID to match dropdown
+        categoryId: data.category?.id || "",  // Use category ID to match dropdown
         code: data.code || "",
         type: data.type || "",
         level: data.level || "",
@@ -52,16 +52,15 @@ export default function Form({ onClose, callback, data }) {
     try {
       const requestData = {
         ...formData,
-        category: { connect: { id: formData.category } },  // Ensure category is connected by ID
       };
 
       if (data) {
         // Update data if editing
-        await axios.patch(`https://be-intern-ads.vercel.app/api/class/${data.id}`, requestData);
+        await axios.patch(`http://localhost:3000/api/class/${data.id}`, requestData);
         alert("Data kelas berhasil diperbarui!");
       } else {
         // Add new data if not editing
-        await axios.post("https://be-intern-ads.vercel.app/api/class", requestData);
+        await axios.post("http://localhost:3000/api/class", requestData);
         alert("Data kelas berhasil ditambahkan!");
       }
 
@@ -106,19 +105,19 @@ export default function Form({ onClose, callback, data }) {
 
           {/* Kategori (Dropdown) */}
           <div className="mb-4">
-            <label htmlFor="category" className="block mb-2 font-medium">
+            <label htmlFor="categoryId" className="block mb-2 font-medium">
               Kategori
             </label>
             <select
-              name="category"
-              value={formData.category || ""}
+              name="categoryId"
+              value={formData.categoryId || ""}
               onChange={handleChange}
               className="border rounded-[20px] w-[450px] py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#6148FF]"
             >
               <option className='text-[#8A8A8A]'value="">Pilih Kategori</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
-                  {category.category}
+                  {category.name}
                 </option>
               ))}
             </select>

@@ -13,7 +13,7 @@ export default function TabelKelola() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://be-intern-ads.vercel.app/api/class");
+      const response = await axios.get("http://localhost:3000/api/class");
       if (response.data && response.data.datas) {
         setClassData(response.data.datas);
       }
@@ -25,7 +25,7 @@ export default function TabelKelola() {
   const handleDelete = async (id) => {
     if (window.confirm("Apakah Anda yakin ingin menghapus kelas ini?")) {
       try {
-        await axios.delete(`https://be-intern-ads.vercel.app/api/class/${id}`);
+        await axios.delete(`http://localhost:3000/api/class/${id}`);
         alert("Data berhasil dihapus!");
         setClassData(prevData => prevData.filter(item => item.id !== id));
       } catch (error) {
@@ -85,7 +85,7 @@ export default function TabelKelola() {
             {classData.map((item) => (
               <tr key={item.id} className='h-10 text-center hover:bg-gray-100 text-gray-600'>
                 <td className='px-4 py-4'>{item.code}</td>
-                <td className='px-4 py-4'>{item.category?.category || 'Tidak ada kategori'}</td>
+                <td className='px-4 py-4'>{item.category?.name || 'Tidak ada kategori'}</td>
                 <td className='px-4 py-4 font-semibold'>{item.name}</td>
                 <td className={`px-4 py-4 font-semibold ${item.type === 'GRATIS' ? 'text-green-400' : 'text-purple-800'}`}>
                   {item.type}

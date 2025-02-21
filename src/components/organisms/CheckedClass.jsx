@@ -12,7 +12,7 @@ export default function CheckedClass() {
     const fetchClasses = async () => {
       try {
         setLoading(true);  // Set loading true saat memulai fetch
-        const response = await axios.get('https://be-intern-ads.vercel.app/api/class');  // Sesuaikan dengan endpoint yang benar
+        const response = await axios.get('http://localhost:3000/api/class');  // Sesuaikan dengan endpoint yang benar
         setClasses(response.data.datas);  // Menyimpan data kelas yang diterima
       } catch (error) {
         setError('Terjadi kesalahan saat memuat data kelas.');
